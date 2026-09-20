@@ -1,0 +1,77 @@
+.venv
+# --- Python Derleme ve Byte-code Dosyaları ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# --- Sanal Ortamlar (Virtual Environments) ---
+# Kendi kullandığınız sanal ortam klasör adına göre burası çalışır
+.venv/
+venv/
+ENV/
+env/
+# Pipenv ve Poetry ortamları
+.venv
+.pypoetry/
+.pdm-python
+.uv/
+
+# --- Gizli ve Çevre Değişkeni Dosyaları (API Keys, Şifreler vb.) ---
+.env
+.env.local
+.env.development
+.env.production
+*.env
+
+# --- Paketleme ve Dağıtım Çıktıları (Distribution / Packaging) ---
+bin/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Test, Raporlama ve Cache Çıktıları ---
+.htmlcov/
+.tox/
+.nosetests/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- Jupyter Notebook Kalıntıları ---
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# --- Popüler Editörler (VS Code, PyCharm) ve Sistem Dosyaları ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# İşletim sistemi kalıntıları
+.DS_Store
+Thumbs.db
