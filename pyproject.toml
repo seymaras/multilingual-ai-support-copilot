@@ -4,9 +4,14 @@ version = "0.1.0"
 description = "A multilingual AI support system that answers questions using reliable information retrieved from company documents."
 requires-python = ">=3.11"
 
+dependencies = [
+    "sentence-transformers"
+]
+
 [project.optional-dependencies]
 dev = [
     "pytest"
 ]
+
 [tool.pytest.ini_options]
 pythonpath = ["src"]
