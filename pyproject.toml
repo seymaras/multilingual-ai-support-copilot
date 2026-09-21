@@ -3,3 +3,8 @@ name = "multilingual-ai-support-copilot"
 version = "0.1.0"
 description = "A multilingual AI support system that answers questions using reliable information retrieved from company documents."
 requires-python = ">=3.11"
+
+[project.optional-dependencies]
+dev = [
+    "pytest"
+]
