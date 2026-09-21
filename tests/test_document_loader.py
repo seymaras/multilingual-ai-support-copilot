@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
 
-from src.multilingual_support_copilot.document_loader import load_text_file
+from multilingual_support_copilot.document_loader import load_text_file
 
 def test_load_text_file_reads_content() ->None:
     file_path = Path("data/sample.txt")

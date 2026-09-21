@@ -8,3 +8,5 @@ requires-python = ">=3.11"
 dev = [
     "pytest"
 ]
+[tool.pytest.ini_options]
+pythonpath = ["src"]
