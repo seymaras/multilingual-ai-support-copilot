@@ -23,3 +23,20 @@ def test_search_document_returns_relevant_chunk(tmp_path: Path) -> None:
     assert len(results) == 1
     assert "support" in results[0][0].lower()
     
+def test_search_document_accepts_overlap(tmp_path: Path) -> None:
+    file_path = tmp_path / "support.txt"
+
+    file_path.write_text(
+        "one two three four five six seven eight",
+        encoding="utf-8",
+    )
+
+    results = search_document(
+        query="three four",
+        file_path=file_path,
+        chunk_size=4,
+        overlap=2,
+        top_k=2,
+    )
+
+    assert len(results) == 2

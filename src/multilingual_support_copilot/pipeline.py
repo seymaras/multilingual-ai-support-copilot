@@ -9,11 +9,16 @@ def search_document(
     query: str,
     file_path: Path,
     chunk_size: int = 50,
+    overlap: int = 0,
     top_k: int = 3,
 ) -> list[tuple[str, float]]:
     text = load_text_file(file_path)
 
-    chunks = chunk_text(text, chunk_size)
+    chunks = chunk_text(
+        text,
+        chunk_size=chunk_size,
+        overlap=overlap,
+    )
 
     results = retrieve_top_k_chunks(
         query,
