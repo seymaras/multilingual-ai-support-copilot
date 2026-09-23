@@ -1,0 +1,5 @@
+Customers can reset their password by email.
+The return period is 14 days.
+Returned products must be unused.
+Our office is located in Berlin.
+Customer support is available Monday through Friday.

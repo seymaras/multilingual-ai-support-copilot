@@ -1,0 +1,32 @@
+[
+    {
+      "id": "q1",
+      "language": "tr",
+      "query": "İade için kaç günüm var?",
+      "expected_evidence": "The return period is 14 days."
+    },
+    {
+      "id": "q2",
+      "language": "de",
+      "query": "Wie kann ich mein Passwort zurücksetzen?",
+      "expected_evidence": "Customers can reset their password by email."
+    },
+    {
+      "id": "q3",
+      "language": "en",
+      "query": "Where is the office located?",
+      "expected_evidence": "Our office is located in Berlin."
+    },
+    {
+      "id": "q4",
+      "language": "tr",
+      "query": "İade edilen ürün hangi durumda olmalı?",
+      "expected_evidence": "Returned products must be unused."
+    },
+    {
+      "id": "q5",
+      "language": "de",
+      "query": "Wann ist der Kundensupport verfügbar?",
+      "expected_evidence": "Customer support is available Monday through Friday."
+    }
+  ]
