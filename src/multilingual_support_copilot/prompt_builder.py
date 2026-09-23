@@ -8,6 +8,7 @@ def build_grounded_prompt(
 
     prompt = (
         "Answer the user's question using only the provided context.\n"
+        "Answer in the same language as the user's question.\n"
         "If the context does not contain enough information, say that you do not know.\n\n"
         f"Context:\n{context}\n\n"
         f"Question:\n{query}\n\n"
