@@ -3,7 +3,7 @@ from pathlib import Path
 from multilingual_support_copilot.document_loader import load_text_file
 from multilingual_support_copilot.text_chunker import chunk_text
 from multilingual_support_copilot.retriever import retrieve_top_k_chunks
-
+from multilingual_support_copilot.reranker import rerank_chunks
 
 def search_document(
     query: str,
@@ -11,6 +11,8 @@ def search_document(
     chunk_size: int = 50,
     overlap: int = 0,
     top_k: int = 3,
+    use_reranker: bool = False,
+    candidate_k: int = 5,
 ) -> list[tuple[str, float]]:
     text = load_text_file(file_path)
 
@@ -20,10 +22,22 @@ def search_document(
         overlap=overlap,
     )
 
-    results = retrieve_top_k_chunks(
+    if not use_reranker:
+        return retrieve_top_k_chunks(
+            query,
+            chunks,
+            top_k,
+        )
+
+    candidates = retrieve_top_k_chunks(
         query,
         chunks,
-        top_k,
+        candidate_k,
     )
 
-    return results
+    reranked_results = rerank_chunks(
+        query=query,
+        retrieved_chunks=candidates,
+    )
+
+    return reranked_results[:top_k]

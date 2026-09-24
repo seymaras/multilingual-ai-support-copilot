@@ -1,5 +1,14 @@
 Customers can reset their password by email.
 The return period is 14 days.
 Returned products must be unused.
-Our office is located in Berlin.
+Our headquarters is located in Berlin.
 Customer support is available Monday through Friday.
+Customers have 30 days to update their account information.
+Password reset requests expire after 15 minutes.
+The Berlin office is closed on public holidays.
+Unused gift cards can be refunded within 7 days.
+The standard return period for damaged items is 30 days.
+Customers have 14 days to verify their email address.
+Unused promotional items cannot be returned.
+The Munich office is located near the central station.
+Customer support for premium accounts is available every day.

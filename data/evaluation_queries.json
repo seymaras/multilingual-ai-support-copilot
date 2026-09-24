@@ -14,8 +14,8 @@
     {
       "id": "q3",
       "language": "en",
-      "query": "Where is the office located?",
-      "expected_evidence": "Our office is located in Berlin."
+      "query": "Where is the headquarters located?",
+      "expected_evidence": "Our headquarters is located in Berlin."
     },
     {
       "id": "q4",
@@ -27,6 +27,36 @@
       "id": "q5",
       "language": "de",
       "query": "Wann ist der Kundensupport verfügbar?",
+      "expected_evidence": "Customer support is available Monday through Friday."
+    },
+    {
+      "id": "q6",
+      "language": "tr",
+      "query": "Bir ürünü geri göndermek için ne kadar sürem var?",
+      "expected_evidence": "The return period is 14 days."
+    },
+    {
+      "id": "q7",
+      "language": "de",
+      "query": "Wo befindet sich der Hauptsitz?",
+      "expected_evidence": "Our headquarters is located in Berlin."
+    },
+    {
+      "id": "q8",
+      "language": "tr",
+      "query": "Şifremi e-posta üzerinden yenileyebilir miyim?",
+      "expected_evidence": "Customers can reset their password by email."
+    },
+    {
+      "id": "q9",
+      "language": "de",
+      "query": "Muss die zurückgesendete Ware unbenutzt sein?",
+      "expected_evidence": "Returned products must be unused."
+    },
+    {
+      "id": "q10",
+      "language": "en",
+      "query": "On which days can I reach customer support?",
       "expected_evidence": "Customer support is available Monday through Friday."
     }
   ]

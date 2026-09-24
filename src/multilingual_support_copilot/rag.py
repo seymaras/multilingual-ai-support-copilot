@@ -9,8 +9,10 @@ def answer_question(
     query: str,
     file_path: Path,
     chunk_size: int = 50,
-    top_k: int = 3,
     overlap: int = 0,
+    top_k: int = 3,
+    use_reranker: bool = False,
+    candidate_k: int = 5,
 ) -> str:
     retrieved_chunks = search_document(
         query=query,
@@ -18,7 +20,8 @@ def answer_question(
         chunk_size=chunk_size,
         overlap=overlap,
         top_k=top_k,
-        
+        use_reranker=use_reranker,
+        candidate_k=candidate_k,
     )
 
     prompt = build_grounded_prompt(
