@@ -60,3 +60,76 @@ def test_evaluate_retrieval_returns_correct_recall(
     )
 
     assert recall == 0.5
+
+def test_evaluate_reranked_retrieval_returns_correct_recall(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    document_path = tmp_path / "document.txt"
+    queries_path = tmp_path / "queries.json"
+
+    document_path.write_text(
+        "The return period is 14 days.\n"
+        "Our headquarters is located in Berlin.",
+        encoding="utf-8",
+    )
+
+    queries = [
+        {
+            "id": "q1",
+            "language": "tr",
+            "query": "İade için kaç günüm var?",
+            "expected_evidence": "The return period is 14 days.",
+        },
+        {
+            "id": "q2",
+            "language": "de",
+            "query": "Wo befindet sich der Hauptsitz?",
+            "expected_evidence": "Our headquarters is located in Berlin.",
+        },
+    ]
+
+    queries_path.write_text(
+        json.dumps(queries),
+        encoding="utf-8",
+    )
+
+    def fake_retrieve_top_k_chunks(query, chunks, top_k):
+        return [
+            ("wrong candidate", 0.9),
+            ("The return period is 14 days.", 0.8),
+            ("Our headquarters is located in Berlin.", 0.7),
+        ]
+
+    def fake_rerank_chunks(query, retrieved_chunks):
+        if "İade" in query:
+            return [
+                ("The return period is 14 days.", 2.0),
+                ("wrong candidate", 1.0),
+            ]
+
+        return [
+            ("wrong candidate", 2.0),
+            ("Our headquarters is located in Berlin.", 1.0),
+        ]
+
+    monkeypatch.setattr(
+        evaluation_module,
+        "retrieve_top_k_chunks",
+        fake_retrieve_top_k_chunks,
+    )
+
+    monkeypatch.setattr(
+        evaluation_module,
+        "rerank_chunks",
+        fake_rerank_chunks,
+    )
+
+    recall = evaluation_module.evaluate_reranked_retrieval(
+        document_path=document_path,
+        queries_path=queries_path,
+        top_k=1,
+        candidate_k=3,
+    )
+
+    assert recall == 0.5
