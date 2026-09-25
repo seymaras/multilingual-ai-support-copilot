@@ -6,7 +6,8 @@ requires-python = ">=3.11"
 
 dependencies = [
     "sentence-transformers",
-    "ollama"
+    "ollama",
+    "pydantic"
 ]
 
 [project.optional-dependencies]
