@@ -1,19 +1,61 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "multilingual-ai-support-copilot"
 version = "0.1.0"
 description = "A multilingual AI support system that answers questions using reliable information retrieved from company documents."
+readme = "README.md"
 requires-python = ">=3.11"
 
 dependencies = [
-    "sentence-transformers",
-    "ollama",
-    "pydantic"
+    "sentence-transformers>=6.1,<7",
+    "ollama>=0.6.2,<0.7",
+    "pydantic>=2.13,<3",
+    "pydantic-settings>=2.15,<3",
+    "fastapi>=0.141,<1",
+    "uvicorn>=0.54,<1",
+    "numpy>=2,<3",
+    "httpx>=0.28,<1",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest"
+    "pytest>=9.1,<10",
+    "httpx>=0.28,<1",
+    "ruff>=0.16,<0.17",
+    "mypy>=2.4,<3",
 ]
 
+[project.scripts]
+copilot-eval = "multilingual_support_copilot.evaluation:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-m 'not slow' --strict-markers"
+markers = [
+    "slow: loads real ML models or calls a live Ollama server",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+# Turkish/German text (e.g. dotless "ı") is intentional, not an ambiguous character.
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["sentence_transformers.*"]
+ignore_missing_imports = true

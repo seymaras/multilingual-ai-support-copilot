@@ -75,3 +75,5 @@ coverage.xml
 # İşletim sistemi kalıntıları
 .DS_Store
 Thumbs.db
+# --- Private planning docs (pricing/strategy) ---
+docs/LAUNCH_PROMPT.md
