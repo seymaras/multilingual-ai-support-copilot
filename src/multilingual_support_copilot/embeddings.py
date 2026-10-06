@@ -23,7 +23,10 @@ def get_embedding_model() -> "SentenceTransformer":
 
 
 def embed_texts(texts: list[str]) -> np.ndarray:
-    """Return an ``(len(texts), dim)`` matrix of L2-normalized embeddings."""
+    """Return an ``(len(texts), dim)`` matrix of L2-normalized embeddings.
+
+    Empty input returns a ``(0, 0)`` array without loading the model.
+    """
     if not texts:
         return np.empty((0, 0), dtype=np.float32)
     model = get_embedding_model()

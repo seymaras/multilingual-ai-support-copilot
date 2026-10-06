@@ -163,3 +163,30 @@ def test_search_document_multilingual_with_real_models(documents_dir: Path) -> N
     )
 
     assert "support" in results[0][0].lower()
+
+
+@pytest.mark.parametrize(
+    ("top_k", "candidate_k"),
+    [(0, None), (21, None), (5, 3), (3, 51)],
+)
+def test_search_document_enforces_retrieval_bounds(
+    documents_dir: Path, top_k: int, candidate_k: int | None
+) -> None:
+    _write(documents_dir, "doc", "some text")
+
+    with pytest.raises(ValueError):
+        search_document(query="q", document_id="doc", top_k=top_k, candidate_k=candidate_k)
+
+
+def test_search_document_uses_documents_dir_from_given_settings(
+    tmp_path: Path, fake_embedder: Any
+) -> None:
+    other = tmp_path / "other"
+    other.mkdir()
+    _write(other, "elsewhere", "Our office is located in Berlin.")
+
+    results = search_document(
+        query="office", document_id="elsewhere", top_k=1, settings=Settings(documents_dir=other)
+    )
+
+    assert results[0][0] == "Our office is located in Berlin."

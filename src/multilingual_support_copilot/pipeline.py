@@ -2,7 +2,7 @@
 
 from multilingual_support_copilot.config import Settings, get_settings
 from multilingual_support_copilot.document_loader import load_text_file
-from multilingual_support_copilot.documents import get_document_registry
+from multilingual_support_copilot.documents import DocumentRegistry
 from multilingual_support_copilot.errors import EmptyDocumentError
 from multilingual_support_copilot.reranker import rerank_chunks
 from multilingual_support_copilot.retriever import retrieve_top_k_chunks
@@ -35,11 +35,16 @@ def search_document(
     settings: Settings | None = None,
 ) -> list[tuple[str, float]]:
     settings = settings or get_settings()
-    top_k = top_k or settings.default_top_k
+    if top_k is None:
+        top_k = settings.default_top_k
     if candidate_k is None:
         candidate_k = max(settings.default_candidate_k, top_k)
+    if not 1 <= top_k <= settings.max_top_k:
+        raise ValueError(f"top_k must be between 1 and {settings.max_top_k}")
+    if not top_k <= candidate_k <= settings.max_candidate_k:
+        raise ValueError(f"candidate_k must be between top_k and {settings.max_candidate_k}")
 
-    path = get_document_registry().resolve(document_id)
+    path = DocumentRegistry(settings.documents_dir).resolve(document_id)
     text = load_text_file(path)
     chunks = chunk_text(text, chunk_size=settings.chunk_size, overlap=settings.chunk_overlap)
     if not chunks:
