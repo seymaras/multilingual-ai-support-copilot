@@ -1,0 +1,1169 @@
+{
+  "metadata": {
+    "name": "baseline-stage0",
+    "timestamp_utc": "2026-10-06T13:00:13+00:00",
+    "git_sha": "0ee0a91",
+    "document": "data/evaluation_document.txt",
+    "queries": "data/evaluation_queries.json",
+    "num_queries": 14,
+    "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "reranker_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "chunk_size": 50,
+    "overlap": 0,
+    "num_chunks": 3,
+    "ks": [
+      1,
+      3,
+      5
+    ],
+    "candidate_k": 5
+  },
+  "metrics": {
+    "dense": {
+      "hit_at_k": {
+        "1": 0.5714285714285714,
+        "3": 1.0,
+        "5": 1.0
+      },
+      "recall_at_k": {
+        "1": 0.5714285714285714,
+        "3": 0.9642857142857143,
+        "5": 0.9642857142857143
+      },
+      "mrr": 0.7738095238095238,
+      "mrr_cutoff": 5,
+      "num_queries": 14,
+      "num_chunks": 3,
+      "unreachable_queries": [
+        "q12"
+      ]
+    },
+    "dense+rerank": {
+      "hit_at_k": {
+        "1": 0.9285714285714286,
+        "3": 1.0,
+        "5": 1.0
+      },
+      "recall_at_k": {
+        "1": 0.9285714285714286,
+        "3": 0.9642857142857143,
+        "5": 0.9642857142857143
+      },
+      "mrr": 0.9642857142857143,
+      "mrr_cutoff": 5,
+      "num_queries": 14,
+      "num_chunks": 3,
+      "unreachable_queries": [
+        "q12"
+      ]
+    }
+  },
+  "per_query": {
+    "dense": [
+      {
+        "id": "q1",
+        "language": "tr",
+        "query": "İade için kaç günüm var?",
+        "expected_answer_spans": [
+          "return period is 14 days"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.3357481360435486,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": 0.32106465101242065,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": 0.11687304079532623,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q2",
+        "language": "de",
+        "query": "Wie kann ich mein Passwort zurücksetzen?",
+        "expected_answer_spans": [
+          "reset their password by email"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.44291093945503235,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": 0.25744926929473877,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": 0.04884364455938339,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q3",
+        "language": "en",
+        "query": "Where is the headquarters located?",
+        "expected_answer_spans": [
+          "headquarters is located in Berlin"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.26959028840065,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": 0.11904843151569366,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": 0.0001616794615983963,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q4",
+        "language": "tr",
+        "query": "İade edilen ürün hangi durumda olmalı?",
+        "expected_answer_spans": [
+          "returned products must be unused"
+        ],
+        "first_relevant_rank": 3,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.09030432999134064,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 2,
+            "score": 0.08062206208705902,
+            "preview": "for premium accounts is available every day."
+          },
+          {
+            "rank": 3,
+            "score": 0.01381877064704895,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          }
+        ]
+      },
+      {
+        "id": "q5",
+        "language": "de",
+        "query": "Wann ist der Kundensupport verfügbar?",
+        "expected_answer_spans": [
+          "customer support is available Monday through Friday"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.44533824920654297,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": 0.3813297748565674,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": 0.342321515083313,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q6",
+        "language": "tr",
+        "query": "Bir ürünü geri göndermek için ne kadar sürem var?",
+        "expected_answer_spans": [
+          "return period is 14 days"
+        ],
+        "first_relevant_rank": 2,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.49504590034484863,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 2,
+            "score": 0.40581485629081726,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 3,
+            "score": 0.13591837882995605,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q7",
+        "language": "de",
+        "query": "Wo befindet sich der Hauptsitz?",
+        "expected_answer_spans": [
+          "headquarters is located in Berlin"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.19844764471054077,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": 0.10706381499767303,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": 0.022542623803019524,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q8",
+        "language": "tr",
+        "query": "Şifremi e-posta üzerinden yenileyebilir miyim?",
+        "expected_answer_spans": [
+          "reset their password by email"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.36936619877815247,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": 0.28421005606651306,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": 0.17651024460792542,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q9",
+        "language": "de",
+        "query": "Muss die zurückgesendete Ware unbenutzt sein?",
+        "expected_answer_spans": [
+          "returned products must be unused"
+        ],
+        "first_relevant_rank": 2,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.4007418751716614,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 2,
+            "score": 0.11414924263954163,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 3,
+            "score": 0.065023273229599,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q10",
+        "language": "en",
+        "query": "On which days can I reach customer support?",
+        "expected_answer_spans": [
+          "customer support is available Monday through Friday"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.46289896965026855,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": 0.41880959272384644,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": 0.39282065629959106,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q11",
+        "language": "tr",
+        "query": "İade süresi ne kadar ve iade edilen ürünün hangi koşulu sağlaması gerekiyor?",
+        "expected_answer_spans": [
+          "return period is 14 days",
+          "returned products must be unused"
+        ],
+        "first_relevant_rank": 2,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.2986014485359192,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 2,
+            "score": 0.22083425521850586,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 3,
+            "score": 0.143230602145195,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q12",
+        "language": "de",
+        "query": "Zu welchen Zeiten ist der Kundensupport erreichbar, auch für Premium-Konten?",
+        "expected_answer_spans": [
+          "customer support is available Monday through Friday",
+          "customer support for premium accounts is available every day"
+        ],
+        "first_relevant_rank": 2,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.5009635090827942,
+            "preview": "for premium accounts is available every day."
+          },
+          {
+            "rank": 2,
+            "score": 0.4071498513221741,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 3,
+            "score": 0.38741663098335266,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          }
+        ]
+      },
+      {
+        "id": "q13",
+        "language": "en",
+        "query": "How long is a password reset request valid?",
+        "expected_answer_spans": [
+          "password reset requests expire after 15 minutes"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.6214039325714111,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": 0.4906076192855835,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": 0.10960189998149872,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q14",
+        "language": "de",
+        "query": "Wo liegt das Büro in München?",
+        "expected_answer_spans": [
+          "Munich office is located near the central station"
+        ],
+        "first_relevant_rank": 2,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.5442899465560913,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": 0.3743670582771301,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": 0.031667836010456085,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      }
+    ],
+    "dense+rerank": [
+      {
+        "id": "q1",
+        "language": "tr",
+        "query": "İade için kaç günüm var?",
+        "expected_answer_spans": [
+          "return period is 14 days"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": -0.9304327368736267,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -2.4229700565338135,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": -3.831637382507324,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q2",
+        "language": "de",
+        "query": "Wie kann ich mein Passwort zurücksetzen?",
+        "expected_answer_spans": [
+          "reset their password by email"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 2.8899714946746826,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -5.232991695404053,
+            "preview": "for premium accounts is available every day."
+          },
+          {
+            "rank": 3,
+            "score": -5.813052654266357,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          }
+        ]
+      },
+      {
+        "id": "q3",
+        "language": "en",
+        "query": "Where is the headquarters located?",
+        "expected_answer_spans": [
+          "headquarters is located in Berlin"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": -3.307166576385498,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -4.432258129119873,
+            "preview": "for premium accounts is available every day."
+          },
+          {
+            "rank": 3,
+            "score": -5.317514419555664,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          }
+        ]
+      },
+      {
+        "id": "q4",
+        "language": "tr",
+        "query": "İade edilen ürün hangi durumda olmalı?",
+        "expected_answer_spans": [
+          "returned products must be unused"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": -2.4222476482391357,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -4.417291164398193,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": -5.622005462646484,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q5",
+        "language": "de",
+        "query": "Wann ist der Kundensupport verfügbar?",
+        "expected_answer_spans": [
+          "customer support is available Monday through Friday"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 2.6549108028411865,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -3.1106560230255127,
+            "preview": "for premium accounts is available every day."
+          },
+          {
+            "rank": 3,
+            "score": -3.262375593185425,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          }
+        ]
+      },
+      {
+        "id": "q6",
+        "language": "tr",
+        "query": "Bir ürünü geri göndermek için ne kadar sürem var?",
+        "expected_answer_spans": [
+          "return period is 14 days"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 0.8548439145088196,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -0.9578988552093506,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": -3.923496961593628,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q7",
+        "language": "de",
+        "query": "Wo befindet sich der Hauptsitz?",
+        "expected_answer_spans": [
+          "headquarters is located in Berlin"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": -1.7873625755310059,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -4.21731424331665,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": -4.802425384521484,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q8",
+        "language": "tr",
+        "query": "Şifremi e-posta üzerinden yenileyebilir miyim?",
+        "expected_answer_spans": [
+          "reset their password by email"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": -2.23856520652771,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -2.8905117511749268,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": -4.928186893463135,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q9",
+        "language": "de",
+        "query": "Muss die zurückgesendete Ware unbenutzt sein?",
+        "expected_answer_spans": [
+          "returned products must be unused"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 1.5773229598999023,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -1.636643648147583,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": -6.689579486846924,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q10",
+        "language": "en",
+        "query": "On which days can I reach customer support?",
+        "expected_answer_spans": [
+          "customer support is available Monday through Friday"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": -0.37979787588119507,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -3.9453890323638916,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": -4.610482215881348,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q11",
+        "language": "tr",
+        "query": "İade süresi ne kadar ve iade edilen ürünün hangi koşulu sağlaması gerekiyor?",
+        "expected_answer_spans": [
+          "return period is 14 days",
+          "returned products must be unused"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": -0.6732110381126404,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -2.263867139816284,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 3,
+            "score": -5.765778064727783,
+            "preview": "for premium accounts is available every day."
+          }
+        ]
+      },
+      {
+        "id": "q12",
+        "language": "de",
+        "query": "Zu welchen Zeiten ist der Kundensupport erreichbar, auch für Premium-Konten?",
+        "expected_answer_spans": [
+          "customer support is available Monday through Friday",
+          "customer support for premium accounts is available every day"
+        ],
+        "first_relevant_rank": 2,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 1.3349790573120117,
+            "preview": "for premium accounts is available every day."
+          },
+          {
+            "rank": 2,
+            "score": -0.1428324580192566,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 3,
+            "score": -2.844775438308716,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          }
+        ]
+      },
+      {
+        "id": "q13",
+        "language": "en",
+        "query": "How long is a password reset request valid?",
+        "expected_answer_spans": [
+          "password reset requests expire after 15 minutes"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 3.0849366188049316,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          },
+          {
+            "rank": 2,
+            "score": -4.6481499671936035,
+            "preview": "for premium accounts is available every day."
+          },
+          {
+            "rank": 3,
+            "score": -6.104273796081543,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          }
+        ]
+      },
+      {
+        "id": "q14",
+        "language": "de",
+        "query": "Wo liegt das Büro in München?",
+        "expected_answer_spans": [
+          "Munich office is located near the central station"
+        ],
+        "first_relevant_rank": 1,
+        "retrieved": [
+          {
+            "rank": 1,
+            "score": 4.175049304962158,
+            "preview": "is closed on public holidays. Unused gift cards can be refunded within 7 days. …"
+          },
+          {
+            "rank": 2,
+            "score": -3.6491591930389404,
+            "preview": "for premium accounts is available every day."
+          },
+          {
+            "rank": 3,
+            "score": -5.386234283447266,
+            "preview": "Customers can reset their password by email. The return period is 14 days. Retu…"
+          }
+        ]
+      }
+    ]
+  },
+  "sweep": [
+    {
+      "chunk_size": 8,
+      "overlap": 0,
+      "num_chunks": 14,
+      "configs": {
+        "dense": {
+          "hit_at_k": {
+            "1": 0.7142857142857143,
+            "3": 0.7857142857142857,
+            "5": 0.7857142857142857
+          },
+          "recall_at_k": {
+            "1": 0.6428571428571429,
+            "3": 0.7142857142857143,
+            "5": 0.7142857142857143
+          },
+          "mrr": 0.75,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 14,
+          "unreachable_queries": [
+            "q4",
+            "q9",
+            "q11",
+            "q12",
+            "q14"
+          ]
+        },
+        "dense+rerank": {
+          "hit_at_k": {
+            "1": 0.7857142857142857,
+            "3": 0.7857142857142857,
+            "5": 0.7857142857142857
+          },
+          "recall_at_k": {
+            "1": 0.7142857142857143,
+            "3": 0.7142857142857143,
+            "5": 0.7142857142857143
+          },
+          "mrr": 0.7857142857142857,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 14,
+          "unreachable_queries": [
+            "q4",
+            "q9",
+            "q11",
+            "q12",
+            "q14"
+          ]
+        }
+      }
+    },
+    {
+      "chunk_size": 8,
+      "overlap": 4,
+      "num_chunks": 26,
+      "configs": {
+        "dense": {
+          "hit_at_k": {
+            "1": 0.7857142857142857,
+            "3": 0.9285714285714286,
+            "5": 0.9285714285714286
+          },
+          "recall_at_k": {
+            "1": 0.7142857142857143,
+            "3": 0.8571428571428571,
+            "5": 0.8928571428571429
+          },
+          "mrr": 0.8452380952380951,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 26,
+          "unreachable_queries": [
+            "q12",
+            "q14"
+          ]
+        },
+        "dense+rerank": {
+          "hit_at_k": {
+            "1": 0.8571428571428571,
+            "3": 0.9285714285714286,
+            "5": 0.9285714285714286
+          },
+          "recall_at_k": {
+            "1": 0.7857142857142857,
+            "3": 0.8571428571428571,
+            "5": 0.8928571428571429
+          },
+          "mrr": 0.8928571428571429,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 26,
+          "unreachable_queries": [
+            "q12",
+            "q14"
+          ]
+        }
+      }
+    },
+    {
+      "chunk_size": 16,
+      "overlap": 0,
+      "num_chunks": 7,
+      "configs": {
+        "dense": {
+          "hit_at_k": {
+            "1": 0.42857142857142855,
+            "3": 0.7857142857142857,
+            "5": 0.7857142857142857
+          },
+          "recall_at_k": {
+            "1": 0.39285714285714285,
+            "3": 0.75,
+            "5": 0.75
+          },
+          "mrr": 0.5714285714285714,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 7,
+          "unreachable_queries": [
+            "q4",
+            "q9",
+            "q11",
+            "q14"
+          ]
+        },
+        "dense+rerank": {
+          "hit_at_k": {
+            "1": 0.5714285714285714,
+            "3": 0.7857142857142857,
+            "5": 0.7857142857142857
+          },
+          "recall_at_k": {
+            "1": 0.5357142857142857,
+            "3": 0.75,
+            "5": 0.75
+          },
+          "mrr": 0.6785714285714286,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 7,
+          "unreachable_queries": [
+            "q4",
+            "q9",
+            "q11",
+            "q14"
+          ]
+        }
+      }
+    },
+    {
+      "chunk_size": 16,
+      "overlap": 4,
+      "num_chunks": 9,
+      "configs": {
+        "dense": {
+          "hit_at_k": {
+            "1": 0.5,
+            "3": 0.9285714285714286,
+            "5": 1.0
+          },
+          "recall_at_k": {
+            "1": 0.4642857142857143,
+            "3": 0.8928571428571429,
+            "5": 1.0
+          },
+          "mrr": 0.7083333333333333,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 9,
+          "unreachable_queries": []
+        },
+        "dense+rerank": {
+          "hit_at_k": {
+            "1": 0.8571428571428571,
+            "3": 1.0,
+            "5": 1.0
+          },
+          "recall_at_k": {
+            "1": 0.7857142857142857,
+            "3": 1.0,
+            "5": 1.0
+          },
+          "mrr": 0.9285714285714286,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 9,
+          "unreachable_queries": []
+        }
+      }
+    },
+    {
+      "chunk_size": 32,
+      "overlap": 0,
+      "num_chunks": 4,
+      "configs": {
+        "dense": {
+          "hit_at_k": {
+            "1": 0.35714285714285715,
+            "3": 0.9285714285714286,
+            "5": 0.9285714285714286
+          },
+          "recall_at_k": {
+            "1": 0.32142857142857145,
+            "3": 0.9285714285714286,
+            "5": 0.9285714285714286
+          },
+          "mrr": 0.5833333333333333,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 4,
+          "unreachable_queries": [
+            "q14"
+          ]
+        },
+        "dense+rerank": {
+          "hit_at_k": {
+            "1": 0.7857142857142857,
+            "3": 0.9285714285714286,
+            "5": 0.9285714285714286
+          },
+          "recall_at_k": {
+            "1": 0.75,
+            "3": 0.9285714285714286,
+            "5": 0.9285714285714286
+          },
+          "mrr": 0.8571428571428571,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 4,
+          "unreachable_queries": [
+            "q14"
+          ]
+        }
+      }
+    },
+    {
+      "chunk_size": 32,
+      "overlap": 4,
+      "num_chunks": 4,
+      "configs": {
+        "dense": {
+          "hit_at_k": {
+            "1": 0.42857142857142855,
+            "3": 1.0,
+            "5": 1.0
+          },
+          "recall_at_k": {
+            "1": 0.39285714285714285,
+            "3": 1.0,
+            "5": 1.0
+          },
+          "mrr": 0.6547619047619048,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 4,
+          "unreachable_queries": []
+        },
+        "dense+rerank": {
+          "hit_at_k": {
+            "1": 1.0,
+            "3": 1.0,
+            "5": 1.0
+          },
+          "recall_at_k": {
+            "1": 0.9642857142857143,
+            "3": 1.0,
+            "5": 1.0
+          },
+          "mrr": 1.0,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 4,
+          "unreachable_queries": []
+        }
+      }
+    },
+    {
+      "chunk_size": 50,
+      "overlap": 0,
+      "num_chunks": 3,
+      "configs": {
+        "dense": {
+          "hit_at_k": {
+            "1": 0.5714285714285714,
+            "3": 1.0,
+            "5": 1.0
+          },
+          "recall_at_k": {
+            "1": 0.5714285714285714,
+            "3": 0.9642857142857143,
+            "5": 0.9642857142857143
+          },
+          "mrr": 0.7738095238095238,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 3,
+          "unreachable_queries": [
+            "q12"
+          ]
+        },
+        "dense+rerank": {
+          "hit_at_k": {
+            "1": 0.9285714285714286,
+            "3": 1.0,
+            "5": 1.0
+          },
+          "recall_at_k": {
+            "1": 0.9285714285714286,
+            "3": 0.9642857142857143,
+            "5": 0.9642857142857143
+          },
+          "mrr": 0.9642857142857143,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 3,
+          "unreachable_queries": [
+            "q12"
+          ]
+        }
+      }
+    },
+    {
+      "chunk_size": 50,
+      "overlap": 4,
+      "num_chunks": 3,
+      "configs": {
+        "dense": {
+          "hit_at_k": {
+            "1": 0.35714285714285715,
+            "3": 0.9285714285714286,
+            "5": 0.9285714285714286
+          },
+          "recall_at_k": {
+            "1": 0.32142857142857145,
+            "3": 0.9285714285714286,
+            "5": 0.9285714285714286
+          },
+          "mrr": 0.6428571428571429,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 3,
+          "unreachable_queries": [
+            "q14"
+          ]
+        },
+        "dense+rerank": {
+          "hit_at_k": {
+            "1": 0.8571428571428571,
+            "3": 0.9285714285714286,
+            "5": 0.9285714285714286
+          },
+          "recall_at_k": {
+            "1": 0.8214285714285714,
+            "3": 0.9285714285714286,
+            "5": 0.9285714285714286
+          },
+          "mrr": 0.8928571428571429,
+          "mrr_cutoff": 5,
+          "num_queries": 14,
+          "num_chunks": 3,
+          "unreachable_queries": [
+            "q14"
+          ]
+        }
+      }
+    }
+  ]
+}
