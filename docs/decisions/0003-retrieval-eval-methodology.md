@@ -38,7 +38,7 @@ Two further problems:
 - **Output.** `copilot-eval` writes `docs/evals/<name>.json`, with metadata, git SHA, metrics and
   per-query ranks, plus a Markdown table. `--sweep` adds a chunk_size × overlap grid for context.
 
-## Baseline (Stage 0, git `0ee0a91`)
+## Baseline (Stage 0, git `b1ffd46`)
 14 queries (TR/DE/EN), chunk_size=50, overlap=0, giving 3 chunks:
 
 | config | hit@1 | hit@3 | recall@3 | MRR@5 |

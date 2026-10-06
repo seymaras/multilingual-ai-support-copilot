@@ -1,8 +1,8 @@
 {
   "metadata": {
     "name": "baseline-stage0",
-    "timestamp_utc": "2026-10-06T13:00:13+00:00",
-    "git_sha": "0ee0a91",
+    "timestamp_utc": "2026-10-06T13:04:31+00:00",
+    "git_sha": "b1ffd46",
     "document": "data/evaluation_document.txt",
     "queries": "data/evaluation_queries.json",
     "num_queries": 14,
