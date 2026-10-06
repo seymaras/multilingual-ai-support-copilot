@@ -1,6 +1,6 @@
 # Retrieval evaluation: baseline-stage0
 
-- Generated: 2026-10-06T13:00:13+00:00 (git `0ee0a91`)
+- Generated: 2026-10-06T13:04:31+00:00 (git `b1ffd46`)
 - Document: `data/evaluation_document.txt`; queries: `data/evaluation_queries.json` (14 queries)
 - Chunking: chunk_size=50, overlap=0 -> 3 chunks
 - Embedding model: `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`; reranker: `cross-encoder/mmarco-mMiniLMv2-L12-H384-v1` (candidate_k=5)
