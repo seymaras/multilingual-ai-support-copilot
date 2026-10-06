@@ -1,30 +1,35 @@
-from sentence_transformers import CrossEncoder
+"""Lazily loaded multilingual cross-encoder reranker."""
+
+from functools import lru_cache
+from typing import TYPE_CHECKING
+
+from multilingual_support_copilot.config import get_settings
+
+if TYPE_CHECKING:
+    from sentence_transformers import CrossEncoder
 
 
-RERANKER_MODEL_NAME = "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1"
+@lru_cache(maxsize=1)
+def get_reranker_model() -> "CrossEncoder":
+    from sentence_transformers import CrossEncoder
 
-reranker = CrossEncoder(RERANKER_MODEL_NAME)
+    model: CrossEncoder = CrossEncoder(get_settings().reranker_model_name)
+    return model
 
 
 def rerank_chunks(
     query: str,
     retrieved_chunks: list[tuple[str, float]],
 ) -> list[tuple[str, float]]:
-    pairs = [
-        (query, chunk)
-        for chunk, _ in retrieved_chunks
+    """Re-score ``retrieved_chunks`` with the cross-encoder, highest score first."""
+    if not retrieved_chunks:
+        return []
+
+    pairs = [(query, chunk) for chunk, _ in retrieved_chunks]
+    scores = get_reranker_model().predict(pairs, show_progress_bar=False)
+
+    reranked = [
+        (chunk, float(score)) for (chunk, _), score in zip(retrieved_chunks, scores, strict=True)
     ]
-
-    scores = reranker.predict(pairs)
-
-    reranked_results = [
-        (chunk, float(score))
-        for (chunk, _), score in zip(retrieved_chunks, scores)
-    ]
-
-    reranked_results.sort(
-        key=lambda item: item[1],
-        reverse=True,
-    )
-
-    return reranked_results
+    reranked.sort(key=lambda item: item[1], reverse=True)
+    return reranked
