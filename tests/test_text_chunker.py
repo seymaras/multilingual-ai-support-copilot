@@ -1,5 +1,6 @@
 from multilingual_support_copilot.text_chunker import chunk_text
 
+
 def test_chunk_text_splits_text_by_chunk_size() -> None:
     text = "one two three four five"
 
@@ -20,6 +21,7 @@ def test_chunk_text_returns_single_chunk_when_text_is_short() -> None:
     result = chunk_text(text, chunk_size=50)
 
     assert result == ["hello world"]
+
 
 def test_chunk_text_with_overlap() -> None:
     text = "one two three four five six seven eight"

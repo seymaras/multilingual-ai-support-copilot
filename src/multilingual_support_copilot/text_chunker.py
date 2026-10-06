@@ -12,17 +12,14 @@ def chunk_text(
         raise ValueError("chunk_size must be greater than 0.")
 
     if overlap < 0 or overlap >= chunk_size:
-        raise ValueError(
-            "overlap must be greater than or equal to 0 "
-            "and smaller than chunk_size."
-        )
+        raise ValueError("overlap must be greater than or equal to 0 and smaller than chunk_size.")
 
     chunks = []
 
     step = chunk_size - overlap
 
     for i in range(0, len(words), step):
-        chunk_words = words[i:i + chunk_size]
+        chunk_words = words[i : i + chunk_size]
 
         chunks.append(" ".join(chunk_words))
 

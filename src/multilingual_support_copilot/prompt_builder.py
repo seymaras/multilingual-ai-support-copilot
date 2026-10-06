@@ -2,9 +2,7 @@ def build_grounded_prompt(
     query: str,
     retrieved_chunks: list[tuple[str, float]],
 ) -> str:
-    context = "\n\n".join(
-        chunk for chunk, _ in retrieved_chunks
-    )
+    context = "\n\n".join(chunk for chunk, _ in retrieved_chunks)
 
     prompt = (
         "Answer the user's question using only the provided context.\n"
@@ -16,4 +14,3 @@ def build_grounded_prompt(
     )
 
     return prompt
-    
