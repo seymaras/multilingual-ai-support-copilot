@@ -261,3 +261,13 @@ def test_live_ollama_structured_and_plain(live_ollama: None) -> None:
     assert text
     assert "<think>" not in text.lower()
     print(f"\nlive structured: {structured_seconds:.2f}s, plain: {plain_seconds:.2f}s")
+
+
+def test_structured_keeps_literal_think_tag_inside_json(fake_ollama: FakeOllamaClient) -> None:
+    content = '{"answer": "Use the <think> tag", "has_evidence": true, "sources": []}'
+    fake_ollama.queue(content)
+
+    result = generate_structured_answer("prompt")
+
+    assert result.answer == "Use the <think> tag"
+    assert len(fake_ollama.calls) == 1

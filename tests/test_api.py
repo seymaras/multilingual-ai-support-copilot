@@ -1,3 +1,5 @@
+from importlib.metadata import version
+
 from fastapi.testclient import TestClient
 
 from multilingual_support_copilot.api import app
@@ -15,4 +17,4 @@ def test_health_returns_ok_without_loading_models() -> None:
 
 
 def test_app_version_comes_from_package_metadata() -> None:
-    assert app.version == "0.1.0"
+    assert app.version == version("multilingual-ai-support-copilot")

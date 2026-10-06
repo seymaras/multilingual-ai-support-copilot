@@ -20,8 +20,10 @@ question ──► dense retrieval ──► cross-encoder rerank ──► grou
   - Reranker: `mmarco-mMiniLMv2-L12-H384-v1`
 - **Structured output.** Ollama's JSON-schema `format=` produces an `AnswerResponse`. Output that fails
   the schema is retried, then reported as a clear error.
-- **No context, no LLM call.** If retrieval returns nothing, the copilot answers "I don't know" with
-  `has_evidence=false`.
+- **Grounded prompt.** The LLM is told to answer only from the retrieved context and to say it does
+  not know otherwise. There is no relevance threshold yet, so an off-topic question still retrieves
+  top-k chunks and the "I don't know" decision rests with the LLM (a deterministic threshold is
+  Stage 3).
 - **Documents are referenced by server-managed ID**, never by file path
   ([ADR 0001](docs/decisions/0001-server-managed-document-ids.md)).
 
@@ -116,6 +118,8 @@ claim. Stage 4 expands the corpus and query set.
 - `sources` and `has_evidence` are still produced by the LLM rather than derived from retrieval
   (Stage 3). In a manual run the answer to "İade için kaç günüm var?" was correct (14 days), but the
   cited source was the wrong sentence ("…14 days to verify their email address").
+- No retrieval relevance threshold yet: off-topic questions reach the LLM with unrelated context.
+  In a manual run "Do you offer free shipping?" returned `answer='No'` instead of "I don't know".
 - The "I don't know" fallback text is English only.
 - No HTTP chat endpoint, auth or multi-tenancy yet (Stage 2).
 

@@ -227,12 +227,36 @@ def test_evaluate_passes_parameters_through(monkeypatch: pytest.MonkeyPatch) -> 
     )
 
     assert chunk_calls == [(DOC, 3, 1)]
-    assert len(fake.calls) == 2
+    # Per query: one max-k call (rerank pool 10), plus k=1 and k=3 re-runs because
+    # production reranks a pool of max(candidate_k=7, k) = 7 for those cut-offs.
+    assert [c["top_k"] for c in fake.calls] == [10, 1, 3, 10, 1, 3]
     for call in fake.calls:
-        assert call["top_k"] == 10  # ks larger than the chunk count are fine
         assert call["use_reranker"] is True
         assert call["candidate_k"] == 7
         assert call["chunks"] == ["alpha beta gamma", "gamma delta epsilon"]
+
+
+def test_evaluate_dense_retrieves_once_per_query(monkeypatch: pytest.MonkeyPatch) -> None:
+    fake = FakeSearch({})
+    monkeypatch.setattr(pipeline, "search_chunks", fake)
+
+    evaluate(DOC, [_q("q1", "alpha"), _q("q2", "beta")], chunk_size=3, overlap=1, ks=(1, 3, 10))
+
+    assert [c["top_k"] for c in fake.calls] == [10, 10]
+
+
+def test_evaluate_reuses_max_k_call_when_rerank_pool_matches(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    fake = FakeSearch({})
+    monkeypatch.setattr(pipeline, "search_chunks", fake)
+
+    evaluate(
+        DOC, [_q("q1", "alpha")], chunk_size=3, overlap=1, ks=(1, 3, 5),
+        use_reranker=True, candidate_k=5,
+    )  # fmt: skip
+
+    assert [c["top_k"] for c in fake.calls] == [5]
 
 
 # --- CLI ---------------------------------------------------------------------

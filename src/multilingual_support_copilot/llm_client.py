@@ -82,11 +82,23 @@ def _chat(prompt: str, *, format: dict[str, Any] | None = None) -> str:
             f"Ollama at {host} returned HTTP {err.status_code} for model {model!r}: {err.error}"
         ) from err
 
-    return strip_think_blocks(response.message.content or "")
+    return response.message.content or ""
+
+
+def _parse_structured(content: str) -> AnswerResponse:
+    """Validate raw output first so a literal ``<think>`` inside a JSON string survives;
+    fall back to stripping leaked reasoning around the JSON."""
+    try:
+        return AnswerResponse.model_validate_json(content)
+    except ValidationError:
+        stripped = strip_think_blocks(content)
+        if stripped == content.strip():
+            raise
+        return AnswerResponse.model_validate_json(stripped)
 
 
 def generate_answer(prompt: str) -> str:
-    return _chat(prompt)
+    return strip_think_blocks(_chat(prompt))
 
 
 def generate_structured_answer(prompt: str) -> AnswerResponse:
@@ -101,7 +113,7 @@ def generate_structured_answer(prompt: str) -> AnswerResponse:
     for attempt in range(1, attempts + 1):
         content = _chat(prompt, format=schema)
         try:
-            return AnswerResponse.model_validate_json(content)
+            return _parse_structured(content)
         except ValidationError as err:
             last_error = err
             logger.warning(

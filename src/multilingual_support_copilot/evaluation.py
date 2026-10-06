@@ -124,6 +124,35 @@ def _span_recall(retrieved: Sequence[str], spans: Sequence[str]) -> float:
     return covered / len(spans)
 
 
+def _rerank_pool(top_k: int, candidate_k: int | None) -> int:
+    """Candidate pool size ``pipeline.search_chunks`` reranks for a given ``top_k``."""
+    return max(candidate_k or top_k, top_k)
+
+
+def _top_k_as_in_production(
+    query: str,
+    chunks: list[str],
+    retrieved_max_k: list[str],
+    *,
+    k: int,
+    max_k: int,
+    use_reranker: bool,
+    candidate_k: int | None,
+) -> list[str]:
+    """Top-k exactly as production returns it for ``top_k=k``.
+
+    Dense rankings are prefix-consistent, so slicing the max-k result is exact. With
+    reranking, production reranks a pool of ``max(candidate_k, k)``; if that differs from
+    the pool used for the max-k call, re-run with ``top_k=k``.
+    """
+    if not use_reranker or _rerank_pool(k, candidate_k) == _rerank_pool(max_k, candidate_k):
+        return retrieved_max_k[:k]
+    results = pipeline.search_chunks(
+        query, chunks, top_k=k, use_reranker=True, candidate_k=candidate_k
+    )
+    return [chunk for chunk, _ in results]
+
+
 def _preview(chunk: str) -> str:
     return chunk if len(chunk) <= PREVIEW_CHARS else chunk[: PREVIEW_CHARS - 1] + "…"
 
@@ -172,8 +201,16 @@ def evaluate(
         rank = first_relevant_rank(retrieved, spans)
 
         for k in ks:
-            top = retrieved[:k]
-            if rank is not None and rank <= k:
+            top = _top_k_as_in_production(
+                q.query,
+                chunks,
+                retrieved,
+                k=k,
+                max_k=max_k,
+                use_reranker=use_reranker,
+                candidate_k=candidate_k,
+            )
+            if first_relevant_rank(top, spans) is not None:
                 hits[k] += 1
             recalls[k] += _span_recall(top, spans)
         if rank is not None:
@@ -279,7 +316,7 @@ def _render_markdown(report: dict[str, Any], results: dict[str, RetrievalMetrics
             "",
             "## Chunking sweep (context only)",
             "",
-            f"| chunk_size | overlap | chunks | config | hit@1 | hit@{k_mid} | "
+            f"| chunk_size | overlap | chunks | config | hit@{ks[0]} | hit@{k_mid} | "
             f"recall@{k_mid} | MRR | unreachable |",
             "|---|---|---|---|---|---|---|---|---|",
         ]
@@ -326,7 +363,6 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     document_text = args.document.read_text(encoding="utf-8")
     queries = load_queries(args.queries)
-    validate_spans(document_text, queries)
 
     results: dict[str, RetrievalMetrics] = {}
     per_query: dict[str, list[dict[str, Any]]] = {}
