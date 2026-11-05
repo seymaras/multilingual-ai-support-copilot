@@ -1,0 +1,22 @@
+[
+  {"language": "tr", "question": "İade için kaç günüm var?"},
+  {"language": "tr", "question": "İade edilen ürün hangi durumda olmalı?"},
+  {"language": "tr", "question": "Şifremi nasıl sıfırlayabilirim?"},
+  {"language": "tr", "question": "Şifre sıfırlama isteği ne kadar süre geçerli?"},
+  {"language": "tr", "question": "Müşteri desteğine hangi günler ulaşabilirim?"},
+  {"language": "tr", "question": "Şirketin genel merkezi nerede?"},
+  {"language": "tr", "question": "Kullanılmamış hediye kartımı iade edebilir miyim?"},
+  {"language": "tr", "question": "Hasarlı ürünler için iade süresi ne kadar?"},
+  {"language": "tr", "question": "E-posta adresimi doğrulamak için ne kadar sürem var?"},
+  {"language": "de", "question": "Wie lange habe ich Zeit, um ein Produkt zurückzugeben?"},
+  {"language": "de", "question": "Wie kann ich mein Passwort zurücksetzen?"},
+  {"language": "de", "question": "Wo befindet sich der Hauptsitz?"},
+  {"language": "de", "question": "Ist das Büro in Berlin an Feiertagen geöffnet?"},
+  {"language": "de", "question": "Wo liegt das Büro in München?"},
+  {"language": "de", "question": "Kann ich unbenutzte Werbeartikel zurückgeben?"},
+  {"language": "en", "question": "When is customer support available for premium accounts?"},
+  {"language": "en", "question": "How long do I have to update my account information?"},
+  {"language": "en", "question": "Must returned products be unused?"},
+  {"language": "en", "question": "How long is a password reset request valid?"},
+  {"language": "en", "question": "Within how many days can unused gift cards be refunded?"}
+]

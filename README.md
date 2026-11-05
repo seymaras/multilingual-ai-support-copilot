@@ -41,6 +41,19 @@ cp .env.example .env              # optional; every setting has a default
 Put documents in `COPILOT_DOCUMENTS_DIR` (default `data/`) as `<id>.txt`. The file stem is the
 document ID and must match `^[a-z0-9][a-z0-9_-]{0,63}$`.
 
+Ask questions from the terminal (Ollama must be running; no need to activate the venv):
+
+```bash
+make start                              # interactive: type questions, 'q' to quit
+make ask Q="İade için kaç günüm var?"   # one question
+make demo                               # 20 sample TR/DE/EN questions from data/demo_questions.json
+```
+
+Each answer prints the text, whether evidence was found, the sources and the elapsed time. The
+same CLI is installed as `copilot-ask` (`copilot-ask --help` lists `--document` and `--no-rerank`).
+
+From Python:
+
 ```python
 from multilingual_support_copilot.rag import answer_question_structured
 
@@ -75,11 +88,12 @@ is in [`.env.example`](.env.example). Bounds are validated at start-up
 ## Development
 
 ```bash
-pytest                    # fast suite (~1 s): no model downloads, no Ollama
-pytest -m slow            # real models + live Ollama (skipped if Ollama is unreachable)
-ruff check . && ruff format --check .
-mypy                      # strict
+make test                 # fast suite (~1 s): no model downloads, no Ollama
+make test-slow            # real models + live Ollama (skipped if Ollama is unreachable)
+make check                # ruff lint + format check, mypy (strict), fast suite
 ```
+
+Run `make` with no target to list every command.
 
 - Models load lazily on first use, so importing the package never imports torch.
 - The fast suite fails any test that tries to load a real model.

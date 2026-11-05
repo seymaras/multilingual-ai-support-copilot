@@ -30,6 +30,7 @@ dev = [
 
 [project.scripts]
 copilot-eval = "multilingual_support_copilot.evaluation:main"
+copilot-ask = "multilingual_support_copilot.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
